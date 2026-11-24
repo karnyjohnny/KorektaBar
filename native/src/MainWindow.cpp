@@ -42,7 +42,8 @@ float GetWindowDpiSafe(HWND hwnd) {
     HMODULE user32 = GetModuleHandleW(L"user32.dll");
     if (user32) {
         using GetDpiForWindowFn = UINT(WINAPI*)(HWND);
-        auto fn = reinterpret_cast<GetDpiForWindowFn>(GetProcAddress(user32, "GetDpiForWindow"));
+        auto fn = reinterpret_cast<GetDpiForWindowFn>(
+            reinterpret_cast<void*>(GetProcAddress(user32, "GetDpiForWindow")));
         if (fn && hwnd) {
             UINT d = fn(hwnd);
             if (d > 0) return static_cast<float>(d);
@@ -316,7 +317,7 @@ void MainWindow::Render() {
 
     // Tytuł i skrót po lewej stronie paska narzędzi (uchwyt przeciągania)
     if (uiBoldFont_ && titleBrush) {
-        D2D1_TEXT_ALIGNMENT prevAlign = uiBoldFont_->GetTextAlignment();
+        DWRITE_TEXT_ALIGNMENT prevAlign = uiBoldFont_->GetTextAlignment();
         uiBoldFont_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
         renderTarget_->DrawTextW(L"KorektaBar", 10, uiBoldFont_,
                                  D2D1::RectF(16.0f, 10.0f, 130.0f, 38.0f), titleBrush);
@@ -373,7 +374,7 @@ void MainWindow::Render() {
 
     if (statusFont_ && mutedBrush) {
         std::wstring info = L"PPM na słowie: poprawki  ·  Znaków: " + std::to_wstring(editor_.GetText().size());
-        D2D1_TEXT_ALIGNMENT prev = statusFont_->GetTextAlignment();
+        DWRITE_TEXT_ALIGNMENT prev = statusFont_->GetTextAlignment();
         statusFont_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
         renderTarget_->DrawTextW(info.c_str(), static_cast<UINT32>(info.size()), statusFont_,
                                  D2D1::RectF(w - 340.0f, footerY, w - 16.0f, footerY + 18.0f), mutedBrush);

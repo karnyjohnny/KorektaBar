@@ -23,7 +23,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR lpCmdLine, int) {
     HMODULE user32 = GetModuleHandleW(L"user32.dll");
     if (user32) {
         using SetDpiCtxFn = BOOL(WINAPI*)(DPI_AWARENESS_CONTEXT);
-        auto fn = reinterpret_cast<SetDpiCtxFn>(GetProcAddress(user32, "SetProcessDpiAwarenessContext"));
+        auto fn = reinterpret_cast<SetDpiCtxFn>(
+            reinterpret_cast<void*>(GetProcAddress(user32, "SetProcessDpiAwarenessContext")));
         if (fn) fn(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
     }
 

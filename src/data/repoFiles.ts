@@ -23,6 +23,7 @@ import resourceRc from '../../native/resources/KorektaBar.rc?raw';
 import appManifest from '../../native/resources/app.manifest?raw';
 import releaseYml from '../../.github/workflows/release.yml?raw';
 import readmeMd from '../../README.md?raw';
+import discordMd from '../../discord.md?raw';
 import generateAssetsPy from '../../scripts/generate_assets.py?raw';
 import bannerSvg from '../../assets/banner.svg?raw';
 import icoUrl from '../../assets/KorektaBar.ico?url';
@@ -60,6 +61,7 @@ export const REPO_FILES: RepoFileEntry[] = [
   { path: 'native/resources/app.manifest', group: 'Zasoby i MSYS2', language: 'xml', content: appManifest },
   { path: '.github/workflows/release.yml', group: 'GitHub i Skrypty', language: 'yaml', content: releaseYml },
   { path: 'README.md', group: 'GitHub i Skrypty', language: 'markdown', content: readmeMd },
+  { path: 'discord.md', group: 'GitHub i Skrypty', language: 'markdown', content: discordMd },
   { path: 'scripts/generate_assets.py', group: 'GitHub i Skrypty', language: 'python', content: generateAssetsPy },
   { path: 'assets/banner.svg', group: 'GitHub i Skrypty', language: 'xml', content: bannerSvg },
 ];
