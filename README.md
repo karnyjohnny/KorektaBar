@@ -76,6 +76,12 @@ make -C native -j$(nproc)
 
 Gotowy plik wykonywalny (bez zewnętrznych zależności DLL) powstanie w `native/build/KorektaBar.exe`.
 
+Budowa działa też w **w64devkit** (wystarczy mieć jego `bin` w `PATH`). Domyślne flagi są przenośne; aby wycisnąć maksimum z konkretnego procesora (np. wykryty przez GCC `goldmont` na Celeronie N3350), dodaj:
+
+```bash
+make -C native -j2 MARCH="-march=native -mtune=native"
+```
+
 ### Alternatywnie przez CMake + Ninja (MSYS2 UCRT64)
 
 ```bash
@@ -87,7 +93,7 @@ cmake --build native/build-cmake
 
 ## Automatyczne wydania (GitHub Releases)
 
-Repozytorium zawiera konfigurację **GitHub Actions** (`.github/workflows/release.yml`), która po wypchnięciu taga wersji (np. `git tag v1.0.0 && git push origin v1.0.0`) automatycznie:
+Repozytorium zawiera konfigurację **GitHub Actions** (`.github/workflows/release.yml`). Uruchamia się ona przy **każdym pushu** — dzięki temu od razu widać, czy zmiany się budują (powstaje artefakt `KorektaBar-win64`). Po wypchnięciu taga wersji (`v1.0.0` albo `1.0.0`) wykonuje dodatkowo:
 1. Konfiguruje środowisko `MSYS2 UCRT64` na runnerze `windows-latest`.
 2. Generuje zasoby i kompiluje statyczne `KorektaBar.exe`.
 3. Pakuje gotową paczkę `KorektaBar-win64.zip` i publikuje ją w sekcji **GitHub Releases**.

@@ -1,9 +1,13 @@
-name: Release KorektaBar (MSYS2 Win64)
+name: Build & Release KorektaBar (MSYS2 Win64)
 
 on:
   push:
+    # Każdy push (również do branchy) uruchamia build i sprawdza, czy binarka się kompiluje.
+    branches:
+      - "**"
+    # Każdy tag (v1.0.0 oraz 1.0.0) dodatkowo publikuje wydanie w GitHub Releases.
     tags:
-      - "v*"
+      - "*"
   workflow_dispatch:
     inputs:
       tag:
@@ -43,8 +47,9 @@ jobs:
         run: |
           python3 scripts/generate_assets.py
 
-      - name: Kompiluj KorektaBar.exe (statyczna binarka bez zewnętrznych DLL)
+      - name: Kompiluj KorektaBar.exe (generyczna, statyczna binarka bez zewnętrznych DLL)
         run: |
+          # Bez flagi MARCH — binarka z release musi działać na każdym x86-64 Windows.
           make -C native clean
           make -C native -j$(nproc)
           ls -lh native/build/KorektaBar.exe
@@ -66,7 +71,7 @@ jobs:
             KorektaBar-win64.zip
 
       - name: Opublikuj w GitHub Releases
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
