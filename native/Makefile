@@ -25,7 +25,7 @@ RES_OBJ := $(BUILD_DIR)/KorektaBar.res.o
 
 CXXFLAGS := -std=c++20 -O2 $(MARCH) -ffunction-sections -fdata-sections -DNDEBUG -Wall -Wextra -finput-charset=UTF-8 -DUNICODE -D_UNICODE -Isrc -Iresources
 LDFLAGS  := -mwindows -municode -static -static-libgcc -static-libstdc++ -Wl,--gc-sections -s
-LIBS     := -ld2d1 -ldwrite -ldwmapi -lcomctl32 -lshell32 -lole32 -luuid
+LIBS     := -ld2d1 -ldwrite -ldwmapi -lcomctl32 -lshell32 -lole32 -luuid -luxtheme
 
 .PHONY: all clean
 

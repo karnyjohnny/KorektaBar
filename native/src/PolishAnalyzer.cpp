@@ -376,10 +376,18 @@ std::vector<DiagnosticSpan> PolishAnalyzer::Analyze(
             if (!allCaps) {
                 std::vector<std::wstring> sugg;
                 if (!spellBackend->CheckWord(tok.text, sugg)) {
-                    spans.push_back({tok.start, tok.length, DiagnosticCategory::Spelling,
-                                     L"Nieznane słowo / literówka",
-                                     L"Słowo „" + tok.text + L"” nie występuje w słowniku pl-PL.",
-                                     std::move(sugg), false});
+                    // „Auto-popraw wszystko" podmienia słowo pierwszą sugestią słownika,
+                    // więc dopasuj wielkość litery do oryginału i odrzuć puste/identyczne propozycje.
+                    for (auto& s : sugg) s = MatchCase(tok.text, s);
+                    sugg.erase(std::remove_if(sugg.begin(), sugg.end(), [&](const std::wstring& s) {
+                        return s.empty() || LowercasePolish(s) == tok.lower;
+                    }), sugg.end());
+                    if (!sugg.empty()) {
+                        spans.push_back({tok.start, tok.length, DiagnosticCategory::Spelling,
+                                         L"Nieznane słowo / literówka",
+                                         L"Słowo „" + tok.text + L"” nie występuje w słowniku pl-PL.",
+                                         std::move(sugg), true});
+                    }
                 }
             }
         }

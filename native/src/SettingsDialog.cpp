@@ -3,6 +3,7 @@
 
 #include <dwmapi.h>
 #include <commctrl.h>
+#include <uxtheme.h>
 
 #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 #define DWMWA_USE_IMMERSIVE_DARK_MODE 20
@@ -86,6 +87,10 @@ LRESULT CALLBACK SettingsWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
                 HWND c = CreateWindowExW(0, cls, txt, WS_CHILD | WS_VISIBLE | style,
                                          x, y, w, h, hwnd, reinterpret_cast<HMENU>(static_cast<INT_PTR>(id)),
                                          GetModuleHandleW(nullptr), nullptr);
+                // Przyciski/checkboxy z włączonym motywem systemowym ignorują WM_CTLCOLORBTN
+                // i rysują czarny tekst na jasnym tle. Wyłączamy motyw dla tych kontrolek,
+                // aby uszanowały nasze ciemne kolory.
+                if (cls[0] == L'B') SetWindowTheme(c, L"", L"");
                 SendMessageW(c, WM_SETFONT, reinterpret_cast<WPARAM>(state->font), TRUE);
                 return c;
             };
@@ -124,6 +129,14 @@ LRESULT CALLBACK SettingsWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
             makeCtrl(L"BUTTON", L"Anuluj", BS_PUSHBUTTON, 294, 372, 90, 30, IDC_BTN_CANCEL);
             return 0;
         }
+        case WM_ERASEBKGND:
+            if (state && state->bgBrush) {
+                RECT rc{};
+                GetClientRect(hwnd, &rc);
+                FillRect(reinterpret_cast<HDC>(wParam), &rc, state->bgBrush);
+                return 1;
+            }
+            break;
         case WM_CTLCOLORDLG:
             return state ? reinterpret_cast<LRESULT>(state->bgBrush) : 0;
         case WM_CTLCOLORSTATIC:

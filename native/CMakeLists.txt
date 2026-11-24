@@ -38,4 +38,5 @@ target_link_libraries(KorektaBar PRIVATE
     shell32
     ole32
     uuid
+    uxtheme
 )

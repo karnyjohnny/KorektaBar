@@ -747,16 +747,40 @@ LRESULT MainWindow::HandleMessage(UINT msg, WPARAM wParam, LPARAM lParam) {
             editor_.OnChar(static_cast<wchar_t>(wParam));
             return 0;
 
+        case WM_SYSCHAR:
+            // AltGr+litera może zostać dostarczona jako WM_SYSCHAR zamiast WM_CHAR.
+            if ((GetKeyState(VK_RMENU) & 0x8000) != 0) {
+                editor_.OnChar(static_cast<wchar_t>(wParam));
+                return 0;
+            }
+            break;
+
         case WM_KEYDOWN: {
             UINT vk = static_cast<UINT>(wParam);
             if (vk == VK_ESCAPE) {
                 HideToTray();
                 return 0;
             }
-            bool ctrl = (GetKeyState(VK_CONTROL) & 0x8000) != 0;
+            // AltGr (prawy Alt) jest raportowany systemowo jako Ctrl+Alt.
+            // Bez tego wykluczenia „ż"/„ź" pisane jako AltGr+Z / AltGr+X
+            // wywoływałyby Ctrl+Z (Undo) / Ctrl+X (Wytnij) i zjadały poprzedni znak.
+            bool altGr = (GetKeyState(VK_RMENU) & 0x8000) != 0;
+            bool ctrl = (GetKeyState(VK_CONTROL) & 0x8000) != 0 && !altGr;
             bool shift = (GetKeyState(VK_SHIFT) & 0x8000) != 0;
             editor_.OnKeyDown(vk, ctrl, shift);
             return 0;
+        }
+
+        case WM_SYSKEYDOWN: {
+            // AltGr+litera może zostać dostarczona jako WM_SYSKEYDOWN — obsłuż ją
+            // jak zwykłe wpisywanie znaku (bez interpretowania jako skrót Ctrl+...).
+            UINT vk = static_cast<UINT>(wParam);
+            if ((GetKeyState(VK_RMENU) & 0x8000) != 0 && vk != VK_RMENU && vk != VK_MENU) {
+                bool shift = (GetKeyState(VK_SHIFT) & 0x8000) != 0;
+                editor_.OnKeyDown(vk, false, shift);
+                return 0;
+            }
+            break;
         }
 
         case WM_SETFOCUS:
