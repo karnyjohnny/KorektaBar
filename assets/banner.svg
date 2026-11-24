@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0E1014" />
+      <stop offset="55%" stop-color="#14171E" />
+      <stop offset="100%" stop-color="#101319" />
+    </linearGradient>
+    <radialGradient id="accentGlow" cx="0.78" cy="0.48" r="0.45">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F87171" />
+      <stop offset="55%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#FBBF24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Tło główne -->
+  <rect width="1200" height="340" rx="16" fill="url(#bgGrad)" />
+  <rect width="1200" height="340" rx="16" fill="url(#accentGlow)" />
+  <rect x="0.5" y="0.5" width="1199" height="339" rx="15.5" stroke="#252A34" />
+
+  <!-- Subtelna siatka tła -->
+  <g stroke="#1C2029" stroke-width="1">
+    <line x1="0" y1="85" x2="1200" y2="85" />
+    <line x1="0" y1="170" x2="1200" y2="170" />
+    <line x1="0" y1="255" x2="1200" y2="255" />
+    <line x1="300" y1="0" x2="300" y2="340" />
+    <line x1="600" y1="0" x2="600" y2="340" />
+    <line x1="900" y1="0" x2="900" y2="340" />
+  </g>
+
+  <!-- Ikona aplikacji po lewej -->
+  <g transform="translate(64, 72)">
+    <rect width="64" height="64" rx="14" fill="#181C24" stroke="#2E3646" stroke-width="1.5" />
+    <path d="M18 16 V46 M18 31 L32 16 M22 29 L33 46" stroke="#ECEFF4" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M36 33 L42 39 L51 24" stroke="#38BDF8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M14 53 Q21 50 28 53 T42 53 T52 53" stroke="url(#waveGrad)" stroke-width="2.6" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Tytuł projektu i hasło -->
+  <text x="148" y="102" fill="#ECEFF4" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif" font-size="38" font-weight="700" letter-spacing="-0.8">KorektaBar</text>
+  <text x="148" y="132" fill="#94A3B8" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="500">Natywny korektor i szybki formater języka polskiego pod Windows 10</text>
+
+  <!-- Specyfikacja w czystej typografii -->
+  <text x="64" y="196" fill="#CBD5E1" font-family="Segoe UI, -apple-system, sans-serif" font-size="15" font-weight="600">Win32 API + Direct2D / DirectWrite</text>
+  <text x="64" y="222" fill="#64748B" font-family="Segoe UI, -apple-system, sans-serif" font-size="13">Start &lt; 15 ms (Ctrl + Space)  ·  Budżet &lt; 40 MB RAM  ·  Optymalizacja pod Intel Celeron N3350</text>
+
+  <!-- Pasek parametrów u dołu po lewej -->
+  <g transform="translate(64, 254)">
+    <rect x="0" y="0" width="124" height="32" rx="6" fill="#181C24" stroke="#28303E" />
+    <circle cx="16" cy="16" r="4" fill="#F87171" />
+    <text x="28" y="20" fill="#E2E8F0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">Ortografia PL</text>
+
+    <rect x="136" y="0" width="144" height="32" rx="6" fill="#181C24" stroke="#28303E" />
+    <circle cx="152" cy="16" r="4" fill="#38BDF8" />
+    <text x="164" y="20" fill="#E2E8F0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">Interpunkcja i styl</text>
+
+    <rect x="292" y="0" width="138" height="32" rx="6" fill="#181C24" stroke="#28303E" />
+    <circle cx="308" cy="16" r="4" fill="#FBBF24" />
+    <text x="320" y="20" fill="#E2E8F0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">Szybki formater</text>
+  </g>
+
+  <!-- Miniatura okna w stylu klawiatury ekranowej po prawej -->
+  <g transform="translate(610, 48)">
+    <!-- Ramka okna KorektaBar -->
+    <rect width="530" height="220" rx="10" fill="#14161A" stroke="#2D3442" stroke-width="1.2" />
+
+    <!-- Pasek narzędzi -->
+    <rect x="1" y="1" width="528" height="38" rx="9" fill="#181B21" />
+    <line x1="1" y1="39" x2="529" y2="39" stroke="#252A34" />
+    <text x="16" y="24" fill="#E2E8F0" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">KorektaBar</text>
+    <text x="92" y="24" fill="#64748B" font-family="Segoe UI, sans-serif" font-size="11">Ctrl + Space</text>
+
+    <!-- Przyciski akcji -->
+    <rect x="296" y="8" width="128" height="24" rx="5" fill="#2563EB" />
+    <text x="310" y="24" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="11" font-weight="600">Auto-popraw wszystko</text>
+    <rect x="432" y="8" width="84" height="24" rx="5" fill="#222731" stroke="#313847" />
+    <text x="451" y="24" fill="#CBD5E1" font-family="Segoe UI, sans-serif" font-size="11" font-weight="500">Formatuj</text>
+
+    <!-- Pole tekstowe DirectWrite -->
+    <rect x="14" y="50" width="502" height="122" rx="7" fill="#1B1E24" stroke="#262C37" />
+    <text x="28" y="78" fill="#ECEFF4" font-family="Segoe UI, sans-serif" font-size="14">Wczoraj widziałem się z nim i myślę że to</text>
+    <!-- Niebieskie podkreślenie pod "że" -->
+    <path d="M261 84 Q264 81 267 84 T273 84 T279 84" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+
+    <text x="28" y="106" fill="#ECEFF4" font-family="Segoe UI, sans-serif" font-size="14">napewno dobry pomysł , aby wogóle zacząć.</text>
+    <!-- Czerwone podkreślenia pod "napewno" i "wogóle" -->
+    <path d="M28 112 Q32 109 36 112 T44 112 T52 112 T60 112 T68 112 T76 112" stroke="#F87171" stroke-width="1.8" fill="none" />
+    <path d="M160 112 Q163 109 166 112 T172 112" stroke="#FBBF24" stroke-width="1.8" fill="none" />
+    <path d="M206 112 Q210 109 214 112 T222 112 T230 112 T238 112 T246 112" stroke="#F87171" stroke-width="1.8" fill="none" />
+
+    <!-- Menu kontekstowe PPM -->
+    <g transform="translate(200, 118)">
+      <rect width="174" height="72" rx="6" fill="#1E222B" stroke="#363F50" />
+      <text x="12" y="20" fill="#94A3B8" font-family="Segoe UI, sans-serif" font-size="10">Pisownia rozłączna:</text>
+      <rect x="6" y="26" width="162" height="22" rx="4" fill="#2563EB" fill-opacity="0.25" />
+      <text x="12" y="41" fill="#ECEFF4" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600">w ogóle</text>
+      <text x="12" y="62" fill="#64748B" font-family="Segoe UI, sans-serif" font-size="10">Ignoruj w tej sesji</text>
+    </g>
+
+    <!-- Dolny pasek stanu -->
+    <text x="16" y="198" fill="#94A3B8" font-family="Segoe UI, sans-serif" font-size="11">Błędy: 2 ortografia · 1 interpunkcja · 1 styl</text>
+
+    <!-- Odstęp 10px + Pasek zadań Windows 10 -->
+    <rect x="0" y="232" width="530" height="24" rx="4" fill="#0B0D11" stroke="#1E232D" />
+    <rect x="10" y="238" width="12" height="12" rx="2" fill="#3B82F6" fill-opacity="0.8" />
+    <text x="458" y="248" fill="#64748B" font-family="Consolas, monospace" font-size="10">10 px nad Taskbar</text>
+  </g>
+</svg>

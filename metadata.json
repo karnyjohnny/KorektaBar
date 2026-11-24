@@ -1,0 +1,6 @@
+{
+  "name": "KorektaBar",
+  "description": "Natywny korektor pisowni, interpunkcji i szybki formater języka polskiego w C++20 (Win32 + Direct2D/DirectWrite) dla Windows 10 i Intel Celeron N3350.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
